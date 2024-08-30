@@ -8,15 +8,19 @@ import { useRouter } from "next/navigation";
  
 export const Wallet = () => {
 
+  const router = useRouter();
+  
+  useEffect(() => {
+
+  if(typeof window !== 'undefined'){
     const passwordExits = localStorage.getItem('password') ? true : false;
-    const router = useRouter();
-    
-    useEffect(() => {
+
          if(passwordExits){
             router.push('/signin')
             
          }
-    }, [passwordExits, router])
+        }
+    }, [router])
 
  
     return <div>

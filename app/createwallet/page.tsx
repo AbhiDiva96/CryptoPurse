@@ -68,7 +68,10 @@ export default function CreateWallet ({nemonic}:any) {
           setCurrentIndex(currentIndex + 1);
       
           
-          localStorage.setItem('keypairs', JSON.stringify(newKeypairs));
+          if (typeof window !== "undefined") {
+            localStorage.setItem('keypairs', JSON.stringify(newKeypairs));
+          }
+          
         };
 
         const createEthWallet = () => {
@@ -96,9 +99,9 @@ export default function CreateWallet ({nemonic}:any) {
                  setEthWallets([...ethWallets, newKeypairss]);
                 setCurrentIndex(currentIndex + 1);
             
-                
-                localStorage.setItem('keypairs', JSON.stringify(newKeypairss));
-
+                if (typeof window !== "undefined") {
+                    localStorage.setItem('keypairs', JSON.stringify(newKeypairss));
+                  }
         }
 
     
