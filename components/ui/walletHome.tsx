@@ -36,9 +36,10 @@ export const Wallet = () => {
        
       </div>
 
-      <div className="py-6 sm:py-20 flex justify-center  sm:px-60">
-           <p className="flex justify-center text-md font-serif tracking-wider	">
-             CryptoPurse is Your Personal cryptoCurrency wallet. create your wallet . CryptoPurse introduced to for the transcation of cryptoCurrency with feature of sending and receiving cryptoCurrency. 
+      <div className="py-6 sm:py-20 flex justify-center sm:px-60">
+           <p className="flex justify-center text-md font-serif tracking-wider text-center">
+             CryptoPurse is Your Personal cryptoCurrency wallet. create your wallet.<br />
+             CryptoPurse introduced to for the transcation of cryptoCurrency with feature of sending and receiving cryptoCurrency. 
             </p>
             </div>
 
