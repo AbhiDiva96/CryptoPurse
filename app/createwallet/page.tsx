@@ -1,22 +1,15 @@
 'use client'
-
 import { useRouter } from "next/navigation";
-
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-
 import {derivePath} from 'ed25519-hd-key'
-
 import { mnemonicToSeed, mnemonicToSeedSync } from "bip39";
-
 import { Keypair, PublicKey } from "@solana/web3.js";
 import  {Wallet , HDNodeWallet} from "ethers";
 import nacl from "tweetnacl"
-
 import React, { useState } from "react";
 import { WalletCard } from "@/components/ui/walletCard";
-import { Navbar } from "@/components/ui/Navbar";
 
 
 interface wallet {
@@ -35,16 +28,11 @@ export default function CreateWallet ({nemonic}:any) {
      const router = useRouter();
 
      const [currentIndex, setCurrentIndex] = useState(0);
-    //  const [pubPriKey, setPubPriKey]  = useState([]);
       const [solwallets, setSolWallets] = useState<wallet[]>([]);
       const [ethWallets, setEthWallets] = useState<ethWallet[]>([]);
    
 
      const createSolWallet = () => {
-        // if (!isValidMnemonic(mnmo)) {
-        //     alert("Invalid or missing mnemonic. Please provide a valid seed phrase.");
-        //     return;
-        //   }
       
           const seed = mnemonicToSeedSync(nemonic);
           const path = `m/44'/501'/${currentIndex}'/0'`;
@@ -104,15 +92,12 @@ export default function CreateWallet ({nemonic}:any) {
                   }
         }
 
-    
-     
     const handleLogout = () => {
          
         localStorage.removeItem('password');
         localStorage.removeItem('mneomic')
          localStorage.removeItem('keypairs');
 
-        alert("loged out of the wallet")
         router.push('/')
     }
 
@@ -120,7 +105,7 @@ export default function CreateWallet ({nemonic}:any) {
     return <div >
 
         <div className="flex justify-end p-4">
-            <div className="border-4 rounded-full p-1 cursor-pointer hover:before:content-['logout']" onClick={()=> handleLogout()} >
+            <div className="border-4 rounded-full p-4 cursor-pointer hover:before:content-['logout']" onClick={()=> handleLogout()} >
                 <LogoutIcon />
             </div>
         </div>
@@ -136,10 +121,6 @@ export default function CreateWallet ({nemonic}:any) {
             </div>
             </div>
 
-
-        
-    
-     
       
       <div className="flex justify-center ">
            <div className="flex justify-center h-48 w-auto sm:w-[900px] p-4 border border-slate-400 bg-zinc-800">
@@ -150,9 +131,7 @@ export default function CreateWallet ({nemonic}:any) {
                         Choose Wallet
                     </div>
 
-                    <div className="flex justify-center grid grid-cols-2 gap-8">
-
-                   
+                    <div className="flex justify-center grid grid-cols-2 gap-8">                   
                         <button onClick={createSolWallet}>
                       
                         <div className="bg-slate-900 border border-zinc-700 p-4 rounded w-auto cursor-pointer">
@@ -160,7 +139,6 @@ export default function CreateWallet ({nemonic}:any) {
                            < AddCircleOutlineIcon />
                             </div>
                         <div>
-                     
                             solana wallet
                         </div>
                         </div>
@@ -183,12 +161,8 @@ export default function CreateWallet ({nemonic}:any) {
                     </div>
                  </div>
            </div>
-           </div>
-
-          
+           </div>     
       
-
-
        <div className="pt-10">
             <div className="flex justify-center relative z-[-1] flex place-items-center  before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
                 <div className="border border-zinc-700 flex justify-center h-full w-auto sm:w-full p-4 ">
@@ -233,23 +207,12 @@ export default function CreateWallet ({nemonic}:any) {
                                         </div>
                                     </div>
                                 </div>
-                                 
                             <div>
                         </div>
                 </div>
             </div>
-        </div >
-
-                       
-                            
+        </div >        
         </div>
-
-            
-
     </div>
             
 }
-
-// CreateWallet.propTypes = {
-//     mnmo: PropTypes.string.isRequired,
-//   };
