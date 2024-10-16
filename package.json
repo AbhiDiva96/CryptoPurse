@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "hardhat test",                     // Added script to run Hardhat tests
-    "deploy": "hardhat run scripts/deploy.js" // Added script for deployment
+    "test": "hardhat test",                     
+    "deploy": "hardhat run scripts/deploy.js" 
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -24,8 +24,8 @@
     "react": "^18",
     "react-dom": "^18",
     "tweetnacl": "^1.0.3",
-    "@nomiclabs/hardhat-waffle": "^2.0.0",   // Added Hardhat Waffle
-    "hardhat": "^2.8.0"                       // Added Hardhat
+    "@nomiclabs/hardhat-waffle": "^2.0.0",   
+    "hardhat": "^2.8.0"                      
   },
   "devDependencies": {
     "@types/node": "^20",
