@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "hardhat test",                     
+    "deploy": "hardhat run scripts/deploy.js" 
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -21,7 +23,9 @@
     "prop-types": "^15.8.1",
     "react": "^18",
     "react-dom": "^18",
-    "tweetnacl": "^1.0.3"
+    "tweetnacl": "^1.0.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.0",   
+    "hardhat": "^2.8.0"                      
   },
   "devDependencies": {
     "@types/node": "^20",
