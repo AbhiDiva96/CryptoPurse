@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import { ArrowLeft, Copy, Check, X } from 'lucide-react';
 
 interface CardProps {
   balance: string;
@@ -10,6 +11,7 @@ interface CardProps {
 
 export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey }) => {
   const [showPrivateKey, setShowPrivateKey] = useState(false);
+  const [copiedText, setCopiedText] = useState<string | null>(null);
 
   const shortPublicKey = `${publicKey.slice(0, 6)}...${publicKey.slice(-6)}`;
   const shortPrivateKey = `${privateKey.slice(0, 6)}...${privateKey.slice(-6)}`;
@@ -17,7 +19,8 @@ export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
         .then(() => {
-            alert("Copied to clipboard!");
+          setCopiedText(text);
+          setTimeout(() => setCopiedText(null), 2000);
         })
         .catch((err) => {
             alert("Failed to copy to clipboard");
@@ -31,7 +34,7 @@ export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey
     <div>
       <div className="flex justify-center">
         <div className="flex justify-center w-fit h-full border border-zinc-800 p-2 rounded">
-          <div className="relative z-[-1] flex place-items-center">
+          <div className="relative flex place-items-center">
             <div>
               <div className="pb-16">
                 <p className="flex justify-center bg-slate-800 p-2 font-bold text-xl rounded">
@@ -44,11 +47,13 @@ export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey
                 <p className="text-sm">Public Key</p>
                 <div className="flex justify-between w-full h-full border border-zinc-800 rounded p-1 gap-2">
                   <div>{shortPublicKey}</div>
-                  <div onClick={()=>copyToClipboard(publicKey)}>
-                  
-                    <ContentCopyOutlinedIcon/>
-                 
-                  </div>
+                  <button onClick={()=>copyToClipboard(publicKey)}>
+                    {copiedText ? (
+                      <Check size={25} className='text-green-600' />
+                    ) : (
+                      <ContentCopyOutlinedIcon />
+                    )}
+                  </button>
                 
                 </div>
               </div>
@@ -69,9 +74,9 @@ export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey
       </div>
 
       {showPrivateKey && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center">
           <div className="fixed inset-0 bg-black opacity-50" onClick={toggleModal}></div>
-          <div className="bg-slate-900 p-6 w-full rounded shadow-lg z-50">
+          <div className="bg-slate-900 p-6 w-full rounded shadow-lg">
             <h2 className="text-lg font-bold mb-4">Private Key</h2>
             <p className="mb-4">{privateKey}</p>
             <button
