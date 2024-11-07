@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from "react";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";

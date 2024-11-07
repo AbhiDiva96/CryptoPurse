@@ -1,25 +1,38 @@
-'use client'
-import Link from "next/link"
-'use client'
+'use client';
+
+import Link from "next/link";
 import { Wallet2, Sun, Moon } from "lucide-react";
 import React, { useEffect, useState } from 'react';
 
 // Navbar Component
 export const Navbar = () => {
-    const [isDark, setIsDark] = useState(() => {
-      if (typeof window !== 'undefined') {
-        const savedTheme = localStorage.getItem('theme');
-        return savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-      }
-      return false;
-    });
+    const [isDark, setIsDark] = useState<boolean | undefined>(undefined);
 
+    // Set theme after component mounts (avoiding server-client mismatch)
     useEffect(() => {
       if (typeof window !== 'undefined') {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme ? savedTheme === 'dark' : prefersDark;
+        setIsDark(initialTheme);
+
+        // Apply theme to the document based on initialTheme
+        document.documentElement.classList.toggle('dark', initialTheme);
+      }
+    }, []);
+
+    // Update theme and save preference in localStorage
+    useEffect(() => {
+      if (isDark !== undefined) {
         document.documentElement.classList.toggle('dark', isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
       }
     }, [isDark]);
+
+    if (isDark === undefined) {
+      // Prevent rendering until theme is determined to avoid mismatch
+      return null;
+    }
 
     return (
       <nav className="sticky top-0 w-full z-50 bg-white/80 dark:bg-zinc-900/90 backdrop-blur-xl border-b border-gray-200 dark:border-zinc-800">
@@ -43,4 +56,3 @@ export const Navbar = () => {
       </nav>
     );
 };
-
