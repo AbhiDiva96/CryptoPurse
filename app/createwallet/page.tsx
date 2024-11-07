@@ -77,7 +77,7 @@ export default function CreateWallet({ nemonic }: any) {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white dark:from-zinc-900 dark:to-black">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-cyan-500 to-blue-500 dark:from-zinc-900 dark:to-black">
             <div className="w-full max-w-6xl mx-auto p-8 rounded-2xl bg-white dark:bg-zinc-900/90 border border-gray-200 dark:border-zinc-800/50 shadow-xl dark:shadow-2xl shadow-gray-200/50 dark:shadow-black/50 backdrop-blur-xl overflow-hidden">
                 <div className="flex justify-center p-8">
                     <h2 className="text-4xl md:text-6xl pb-4 font-sans font-bold antialiased hover:subpixel-antialiased text-gray-800 dark:text-gray-200">

@@ -20,6 +20,7 @@ export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey
         alert("Copied to clipboard!");
       })
       .catch((err) => {
+        console.error("Failed to copy to clipboard:", err);
         alert("Failed to copy to clipboard");
       });
   };
@@ -52,9 +53,11 @@ export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey
           <div className="mt-6">
             <p className="text-sm text-gray-500 dark:text-gray-400">Private Key</p>
             <div className="flex justify-between w-full h-full bg-gray-100 dark:bg-zinc-800 rounded p-3 gap-3">
-              <div className="text-gray-800 dark:text-gray-200 max-w-[300px] overflow-hidden text-ellipsis">{shortPrivateKey}</div>
+              <div className="text-gray-800 dark:text-gray-200 max-w-[300px] overflow-hidden text-ellipsis">
+                {showPrivateKey ? privateKey : shortPrivateKey}
+              </div>
               <button onClick={toggleModal} className="text-gray-600 dark:text-gray-400">
-                <RemoveRedEyeOutlinedIcon />
+                {showPrivateKey ? <RemoveRedEyeOutlinedIcon /> : <RemoveRedEyeOutlinedIcon />}
               </button>
             </div>
           </div>
