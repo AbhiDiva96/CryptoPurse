@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Wallet2, Sun, Moon } from "lucide-react";
 
-// Navbar Component
-
 // WalletHome Component
 export const Wallet = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -14,17 +13,18 @@ export const Wallet = () => {
         window.location.href = '/signin';
       }
       setIsLoading(false);
+      setIsClient(true);
     }
   }, []);
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white dark:from-zinc-900 dark:to-black">
-      <div className="relative w-16 h-16">
-        <div className="absolute top-0 left-0 w-full h-full rounded-full border-4 border-blue-500/30 dark:border-blue-400/20"></div>
-        <div className="absolute top-0 left-0 w-full h-full rounded-full border-4 border-transparent border-t-blue-500 dark:border-t-blue-400 animate-spin"></div>
+        <div className="relative w-16 h-16">
+          <div className="absolute top-0 left-0 w-full h-full rounded-full border-4 border-blue-500/30 dark:border-blue-400/20"></div>
+          <div className="absolute top-0 left-0 w-full h-full rounded-full border-4 border-transparent border-t-blue-500 dark:border-t-blue-400 animate-spin"></div>
+        </div>
       </div>
-    </div>
     );
   }
 
@@ -32,9 +32,13 @@ export const Wallet = () => {
     <div className="w-full max-w-3xl mx-auto p-6 rounded-2xl bg-white dark:bg-zinc-900/90 border border-gray-200 dark:border-zinc-800/50 shadow-xl dark:shadow-2xl shadow-gray-200/50 dark:shadow-black/50 backdrop-blur-xl overflow-hidden">
       {/* Header Section with Gradient */}
       <div className="relative h-24 sm:h-32 bg-gradient-to-r from-blue-600 via-violet-600 to-purple-600 dark:from-blue-500 dark:via-violet-500 dark:to-purple-500 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cGF0aCBkPSJNLTEwIDMwaDYwdigyKUgtMTB6IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMiIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==')] opacity-30"></div>
+        {isClient && (
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cGF0aCBkPSJNLTEwIDMwaDYwdigyKUgtMTB6IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMiIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==')] opacity-30"></div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-        <Wallet2 className="h-10 w-10 sm:h-12 sm:w-12 text-white mb-2 mx-auto relative z-10 animate-float" />
+        {isClient && (
+          <Wallet2 className="h-10 w-10 sm:h-12 sm:w-12 text-white mb-2 mx-auto relative z-10 animate-float" />
+        )}
       </div>
 
       {/* Content Section */}

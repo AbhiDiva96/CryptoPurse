@@ -1,6 +1,7 @@
 'use client';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function Auth() {
   const [password, setPassword] = useState("");
@@ -13,16 +14,32 @@ export default function Auth() {
 
   const submit = () => {
     if (!password || !confirm) {
-      alert('Please fill in all inputs');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Input',
+        text: 'Please fill in all inputs',
+        confirmButtonColor: '#3085d6',
+      });
       return;
     }
 
     if (password === confirm) {
       storePassword();
-      alert('Welcome to the wallet page');
-      router.push('/createwallet');
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Welcome to the wallet page',
+        confirmButtonColor: '#3085d6',
+      }).then(() => {
+        router.push('/createwallet');
+      });
     } else {
-      alert('Passwords do not match');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Passwords do not match',
+        confirmButtonColor: '#d33',
+      });
     }
   };
 

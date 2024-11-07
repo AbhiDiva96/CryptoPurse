@@ -11,58 +11,51 @@ interface CardProps {
 export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey }) => {
   const [showPrivateKey, setShowPrivateKey] = useState(false);
 
-  const shortPublicKey = `${publicKey.slice(0, 6)}...${publicKey.slice(-6)}`;
-  const shortPrivateKey = `${privateKey.slice(0, 6)}...${privateKey.slice(-6)}`;
+  const shortPublicKey = `${publicKey.slice(0, 8)}...${publicKey.slice(-8)}`;
+  const shortPrivateKey = `${privateKey.slice(0, 8)}...${privateKey.slice(-8)}`;
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
-        .then(() => {
-            alert("Copied to clipboard!");
-        })
-        .catch((err) => {
-            alert("Failed to copy to clipboard");
-        });
-};
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch((err) => {
+        alert("Failed to copy to clipboard");
+      });
+  };
+
   const toggleModal = () => {
     setShowPrivateKey(!showPrivateKey);
   };
 
   return (
-    <div>
-      <div className="flex justify-center">
-        <div className="flex justify-center w-fit h-full border border-zinc-800 p-2 rounded">
-          <div className="relative z-[-1] flex place-items-center">
-            <div>
-              <div className="pb-16">
-                <p className="flex justify-center bg-slate-800 p-2 font-bold text-xl rounded">
-                  ${balance}
-                </p>
-                <p>Available Balance</p>
-              </div>
+    <div className="w-full max-w-lg mx-auto">
+      <div className="bg-white dark:bg-zinc-900/90 border border-gray-200 dark:border-zinc-800/50 rounded-2xl shadow-xl dark:shadow-2xl shadow-gray-200/50 dark:shadow-black/50 backdrop-blur-xl overflow-hidden">
+        <div className="p-8">
+          <div className="pb-16">
+            <p className="flex justify-center bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-zinc-800 text-white dark:text-zinc-200 font-bold text-2xl rounded p-3">
+              {balance}
+            </p>
+            <p className="text-gray-500 dark:text-gray-400">Available Balance</p>
+          </div>
 
-              <div>
-                <p className="text-sm">Public Key</p>
-                <div className="flex justify-between w-full h-full border border-zinc-800 rounded p-1 gap-2">
-                  <div>{shortPublicKey}</div>
-                  <div onClick={()=>copyToClipboard(publicKey)}>
-                  
-                    <ContentCopyOutlinedIcon/>
-                 
-                  </div>
-                
-                </div>
+          <div>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Public Key</p>
+            <div className="flex justify-between w-full h-full bg-gray-100 dark:bg-zinc-800 rounded p-3 gap-3">
+              <div className="text-gray-800 dark:text-gray-200 max-w-[300px] overflow-hidden text-ellipsis">{shortPublicKey}</div>
+              <div onClick={() => copyToClipboard(publicKey)} className="cursor-pointer">
+                <ContentCopyOutlinedIcon className="text-gray-600 dark:text-gray-400" />
               </div>
+            </div>
+          </div>
 
-              <div className="mt-4">
-                <p className="text-sm">Private Key</p>
-                <div className="flex justify-between w-full h-full border border-zinc-800 rounded p-1 gap-2">
-                  <div>{shortPrivateKey}</div>
-                  <button onClick={toggleModal}>
-                    <RemoveRedEyeOutlinedIcon />
-                  </button>
-                </div>
-              </div>
-              
+          <div className="mt-6">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Private Key</p>
+            <div className="flex justify-between w-full h-full bg-gray-100 dark:bg-zinc-800 rounded p-3 gap-3">
+              <div className="text-gray-800 dark:text-gray-200 max-w-[300px] overflow-hidden text-ellipsis">{shortPrivateKey}</div>
+              <button onClick={toggleModal} className="text-gray-600 dark:text-gray-400">
+                <RemoveRedEyeOutlinedIcon />
+              </button>
             </div>
           </div>
         </div>
@@ -70,12 +63,12 @@ export const WalletCard: React.FC<CardProps> = ({ balance, publicKey, privateKey
 
       {showPrivateKey && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-50" onClick={toggleModal}></div>
-          <div className="bg-slate-900 p-6 w-full rounded shadow-lg z-50">
-            <h2 className="text-lg font-bold mb-4">Private Key</h2>
-            <p className="mb-4">{privateKey}</p>
+          <div className="fixed inset-0 bg-black dark:bg-zinc-900 opacity-50" onClick={toggleModal}></div>
+          <div className="bg-white dark:bg-zinc-900/90 p-8 w-full max-w-md rounded-2xl shadow-xl dark:shadow-2xl shadow-gray-200/50 dark:shadow-black/50 backdrop-blur-xl overflow-hidden z-50">
+            <h2 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Private Key</h2>
+            <p className="mb-4 text-gray-600 dark:text-gray-400">{privateKey}</p>
             <button
-              className="mt-2 p-2 border rounded bg-red-500 text-white hover:bg-red-700"
+              className="mt-2 p-2 border rounded bg-red-500 text-white hover:bg-red-700 dark:bg-red-700 dark:text-white dark:hover:bg-red-600"
               onClick={toggleModal}
             >
               Close
