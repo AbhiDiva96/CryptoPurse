@@ -4,11 +4,15 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict--Type-blue)](https://www.typescriptlang.org/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Dynamic--Lang-yellow)](https://www.javascript.com/)
 [![License](https://img.shields.io/github/license/AbhiDiva96/CryptoPurse)](https://github.com/AbhiDiva96/CryptoPurse/blob/main/LICENSE)
-[![Contributors](https://img.shields.io/github/contributors/AbhiDiva96/CryptoPurse)](https://github.com/AbhiDiva96/CryptoPurse/graphs/contributors)
 
 CryptoPurse is a simple and easy-to-use crypto wallet interface where users can connect their wallet or import an existing wallet using private keys or seed phrases. This project leverages **Next.js**, **TypeScript**, and **JavaScript** for seamless wallet integration.
 
 ---
+
+## 📈 GitHub Repository Stats
+| 🌟 **Stars** | 🍴 **Forks** | 🐛 **Issues** | 🔔 **Open PRs** | 🔕 **Closed PRs** | 🛠️ **Languages** | ✅ **Contributors** |
+|--------------|--------------|---------------|-----------------|------------------|------------------|------------------|
+| ![GitHub stars](https://img.shields.io/github/stars/AbhiDiva96/CryptoPurse) | ![forks](https://img.shields.io/github/forks/AbhiDiva96/CryptoPurse) | ![issues](https://img.shields.io/github/issues/AbhiDiva96/CryptoPurse?color=32CD32) | ![pull requests](https://img.shields.io/github/issues-pr/AbhiDiva96/CryptoPurse?color=FFFF8F) | ![Closed PRs](https://img.shields.io/github/issues-pr-closed/AbhiDiva96/CryptoPurse?color=20B2AA) | ![Languages](https://img.shields.io/github/languages/count/AbhiDiva96/CryptoPurse?color=20B2AA) | ![Contributors](https://img.shields.io/github/contributors/AbhiDiva96/CryptoPurse?color=00FA9A) |
 
 ## 📜 Table of Contents
 
