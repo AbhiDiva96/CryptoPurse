@@ -1,94 +1,83 @@
 'use client'
 
-
-import Link from "next/link"
-import { useState } from "react"
+import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LogoutIcon from "@mui/icons-material/Logout";
-export default function SingIn (){
+import Swal from 'sweetalert2';
 
-    const[validPassword, setValidPassword]  = useState('');
-
-    // const passwordExits = localStorage.getItem('password') ? true : false;
-
+export default function SingIn () {
+    const [validPassword, setValidPassword] = useState('');
     const router = useRouter();
 
-     const handleSubmit = () => {
-           const storedpassword = localStorage.getItem('password');
+    const handleSubmit = () => {
+        const storedPassword = localStorage.getItem('password');
+        if (storedPassword === validPassword) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Password Matched',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                router.push('/createwallet');
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Wrong Credential',
+                text: 'Please try again!',
+            });
+        }
+    };
 
-           if(storedpassword == validPassword){
-            alert("Password Matched")
-            router.push('/createwallet')
-           }else{
-              alert('Wrong Credential')
-           }
-         
-     }
-
-     const handleLogout = () => {
-         
+    const handleLogout = () => {
         localStorage.removeItem('password');
-        localStorage.removeItem('mneomic')
-         localStorage.removeItem('keypairs');
+        localStorage.removeItem('mnemonic');
+        localStorage.removeItem('keypairs');
+        Swal.fire({
+            icon: 'success',
+            title: 'Logged out of the wallet',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            router.push('/');
+        });
+    };
 
-        alert("loged out of the wallet")
-        router.push('/')
-    }
-
-    return <div>
-           <div className="flex justify-center  py-10">
-            
-            
-
-            <div className="  w-96 h-96  border border-slate-800 p-20 rounded">
-
-                <div>
-                <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <div className="relative drop-shadow-[0_0_0.3rem_#ffffff70] invert"/>
-         <div className="flex justify-center p-8">
-           <h2 className="text-4xl md:text-6xl pb-14 font-sans font-bold antialiased hover:subpixel-antialiased">
-            Wallet
-           </h2>
-           </div>
-      </div>
-
+    return (
+        <div className="flex justify-center items-center min-h-screen py-10 bg-gray-100 dark:bg-gray-900">
+            <div className="w-full max-w-md p-10 bg-white dark:bg-zinc-800 border border-slate-800 rounded-lg shadow-md">
+                <div className="text-center mb-8">
+                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white">
+                        Wallet
+                    </h2>
                 </div>
-
-             
-                <div className=""> 
-                    <input type="password"
-                     value={validPassword}
-                     onChange={(e) => setValidPassword(e.target.value)}
-                     placeholder="Enter your Password"
-                     className="border border-slate-500 bg-zinc-800 rounded p-2"
+                <div className="mb-6">
+                    <input
+                        type="password"
+                        value={validPassword}
+                        onChange={(e) => setValidPassword(e.target.value)}
+                        placeholder="Enter your Password"
+                        className="w-full p-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-gray-50 dark:bg-zinc-700 text-gray-900 dark:text-white focus:outline-none"
                     />
                 </div>
-                
-                
-                <div className="flex justify-center py-4">
-                <button 
-                  onClick={handleSubmit}
-                 className="bg-black border border-zinc-400 p-2 w-full bg-white text-zinc-950 font-semibold rounded"
-                >
-                     Unlock
-                </button>
-
-
-                <div className="flex justify-center pl-4">
-                    <button onClick={handleLogout}
-                    className="border rounded p-2"
+                <div className="flex justify-center">
+                    <button 
+                        onClick={handleSubmit}
+                        className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition"
                     >
-                    <LogoutIcon />
+                        Unlock
                     </button>
-                    
                 </div>
+                <div className="flex justify-center mt-4">
+                    <button 
+                        onClick={handleLogout}
+                        className="text-gray-500 hover:text-red-600 transition"
+                    >
+                        <LogoutIcon fontSize="large" />
+                    </button>
                 </div>
-
-                
-              
-
             </div>
-
-           </div>
-    </div>
+        </div>
+    );
 }

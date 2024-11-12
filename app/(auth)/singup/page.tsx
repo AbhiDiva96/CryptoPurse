@@ -1,86 +1,86 @@
-'use client'
-
-import { useState } from "react"
+'use client';
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
-export default function Auth () {
+export default function Auth() {
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirmPassword] = useState("");
+  const router = useRouter();
 
-      const[password, setPassword] = useState("");
-      const[confirm, setConfirmpassword] = useState("");
+  function storePassword() {
+    localStorage.setItem("password", password);
+  }
 
+  const submit = () => {
+    if (!password || !confirm) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Input',
+        text: 'Please fill in all inputs',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
 
-       const router = useRouter();
- 
-       function storePassword(){
-            const PasswordStore = password;
-            localStorage.setItem("password", PasswordStore)
-        }
+    if (password === confirm) {
+      storePassword();
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Welcome to the wallet page',
+        confirmButtonColor: '#3085d6',
+      }).then(() => {
+        router.push('/createwallet');
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Passwords do not match',
+        confirmButtonColor: '#d33',
+      });
+    }
+  };
 
-        // if(!passwordExits){
-        //     router.push('/singin')
-        // }else{
-        //   router.push('/')
-        // }
-
-      const submit = () => {
-
-         if(!password || !confirm){
-            alert('fill all the input')
-            return;
-         }
-      
-           if(password == confirm){
-            storePassword();
-             router.push('/createwallet')
-             alert('welcome to wallet page')
-            
-            }else{
-            alert('password is wrong')
-          }
-          
-      }    
-      
-
-    return <div >
-            <div className="flex justify-center relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <div className="relative drop-shadow-[0_0_0.3rem_#ffffff70] invert"/>
-         <div className="flex justify-center py-10">
-           <h2 className=" text-3xl md:text-6xl font-sans font-bold antialiased hover:subpixel-antialiased">
-             Create Password
-           </h2>
-           </div>
-
-      </div>
-
-      <div className="flex justify-center">
-         <input type="password"
-          placeholder="Pasword"
-          value={password} 
-          required
-          onChange={(e) => setPassword(e.target.value)}
-          className="border border-slate-500 w-[100vh] bg-zinc-800 rounded p-3 m-4"
+  return (
+    <div className="flex flex-col items-center min-h-screen py-20 bg-gray-100 dark:bg-gray-900 bg-gradient-to-br from-cyan-500 to-blue-500 dark:bg-none">
+      <div className="w-full max-w-3xl p-16 bg-white dark:bg-zinc-800 border border-slate-800 rounded-2xl shadow-md">
+        <h2 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-8">
+          Set Password
+        </h2>
+        <div className="mb-8">
+          <input 
+            type="password"
+            placeholder="Password"
+            value={password} 
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-4 border border-gray-300 dark:border-slate-600 rounded-lg bg-gray-50 dark:bg-zinc-700 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500"
           />
-           
-      </div>
-      <div className="flex justify-center">
-         <input type="password"
-          placeholder="Confirm Pasword" 
-          required
-          onChange={(e) => setConfirmpassword(e.target.value)}
-          className="border border-slate-500 w-[100vh] bg-zinc-800 rounded p-3 m-4"
+        </div>
+        <div className="mb-8">
+          <input 
+            type="password"
+            placeholder="Confirm Password"
+            value={confirm}
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="w-full p-4 border border-gray-300 dark:border-slate-600 rounded-lg bg-gray-50 dark:bg-zinc-700 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500"
           />
-           
+        </div>
+        <div className="flex justify-center">
+          <button 
+            onClick={submit}
+            disabled={!password || !confirm}
+            className={`w-full py-4 px-8 bg-blue-500 text-white font-semibold rounded-lg transition duration-200 hover:bg-blue-600 ${
+              (!password || !confirm) ? 'cursor-not-allowed opacity-50' : ''
+            }`}
+          >
+            Done
+          </button>
+        </div>
       </div>
-
-   <div className="flex justify-center">
-      <button 
-       onClick={submit}
-       disabled={!password || !confirm}
-       className={`p-4 border border-slate-400 m-4 bg-zinc-900 ${(!password || !confirm) ? 'cursor-not-allowed opacity-50' : ''}`}
-   >
-         Done
-      </button>
-      </div>
-     
     </div>
+  );
 }

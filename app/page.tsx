@@ -18,14 +18,9 @@ export default function Home() {
 // }, [passwordExits, router])
 
 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    
-      
-       <Wallet />
-
-
-      
-    </main>
-  );
+return (
+  <main className="flex min-h-screen w-full bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-zinc-900 dark:via-black dark:to-zinc-900 flex-col items-center justify-between p-4 sm:p-24">
+    <Wallet />
+  </main>
+);
 }
